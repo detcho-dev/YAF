@@ -249,15 +249,18 @@ section .header{
 }
 
 .pricing .basic:hover{
-    background: linear-gradient(135deg, rgba(255,255,255,1) 4%, rgba(204,204,204,1) 45%, rgba(2,0,36,1) 100%);
+    background: linear-gradient(135deg, rgba(255,255,255,1) 4%, rgba(204,204,204,1) 45%, rgba(255,255,255,1) 98%);
+    color: #222;
 }
 
 .pricing .gold:hover{
-    background: linear-gradient(135deg, rgba(255,255,255,1) 4%, rgba(255,215,0,1) 57%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(135deg, rgba(255,255,255,1) 4%, rgba(255,215,0,1) 57%, rgba(255,255,255,1) 98%);
+    color: #222;
 }
 
 .pricing .diamond:hover{
     background: linear-gradient(135deg, rgba(255,255,255,1) 6%, rgba(185,242,255,1) 50%, rgba(255,255,255,1) 98%);
+    color: #222;
 }
 
 .pricing .card .content{

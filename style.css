@@ -221,6 +221,7 @@ section .header{
 }
 
 .pricing .card{
+    position: relative;
     padding: 3rem 2rem;
     background-color: #27272a;
     display: flex;

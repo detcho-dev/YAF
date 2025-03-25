@@ -233,6 +233,19 @@ section .header{
 .pricing .card:hover{
     background-color: #323232;
     border-color: #fff;
+    transition: background 0.5s ease-in-out;
+}
+
+.pricing .basic:hover{
+    background: linear-gradient(135deg, rgba(100, 100, 100, 0.8), rgba(50, 50, 50, 0.8));
+}
+
+.pricing .gold:hover{
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.8), rgba(255, 165, 0, 0.8));
+}
+
+.pricing .diamond:hover{
+    background: linear-gradient(135deg, rgba(185, 242, 255, 0.8), rgba(0, 191, 255, 0.8));
 }
 
 .pricing .card .content{

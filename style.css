@@ -250,31 +250,22 @@ section .header{
 
 .pricing .basic::before {
     background: linear-gradient(135deg, rgba(255,255,255,1) 4%, rgba(204,204,204,1) 45%, rgba(255,255,255,1) 98%);
+    color: #333;
 }
 
 .pricing .gold::before {
     background: linear-gradient(135deg, rgba(255,255,255,1) 4%, rgba(255,215,0,1) 57%, rgba(255,255,255,1) 98%);
+    color: #111;
 }
 
 .pricing .diamond::before {
     background: linear-gradient(135deg, rgba(255,255,255,1) 6%, rgba(185,242,255,1) 50%, rgba(255,255,255,1) 98%);
+    color: #003366;
 }
 
 /* الهوفر بيزود الـ opacity بس، واللون بتغير عادي */
 .pricing .card:hover::before {
     opacity: 1;
-}
-
-.pricing .basic:hover {
-    color: #333;
-}
-
-.pricing .gold:hover {
-    color: #111;
-}
-
-.pricing .diamond:hover {
-    color: #003366;
 }
 
 .pricing .card .content{

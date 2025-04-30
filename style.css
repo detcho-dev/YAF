@@ -266,15 +266,15 @@ section .header{
 }
 
 .pricing .basic:hover {
-    color: rgba(100, 100, 100, 0.5);
+    color: #333;
 }
 
 .pricing .gold:hover {
-    color: #222;
+    color: #111;
 }
 
 .pricing .diamond:hover {
-    color: #222;
+    color: #003366;
 }
 
 .pricing .card .content{

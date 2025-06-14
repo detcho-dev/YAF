@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gray-900 text-white">
+<head>
+  <meta charset="UTF-8">
+  <title>YAFA Effects Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen px-4 py-10 gap-6">
+
+  <h1 class="text-4xl font-bold mb-4">🎨 Choose a YAFA Effect</h1>
+
+  <!-- Step 1: Select Effect -->
+  <div class="w-full max-w-lg">
+    <label for="effectSelect" class="block mb-2 font-semibold">Step 1: Select Effect</label>
+    <select id="effectSelect" class="bg-gray-800 border border-gray-600 px-4 py-2 rounded w-full text-white">
+      <option value="">-- Select Effect --</option>
+      <option value="typing">Typing Effect</option>
+      <option value="fade">Fade Multi-Step</option>
+    </select>
+  </div>
+
+  <!-- Step 2: Head Code -->
+  <div id="headBox" class="hidden w-full max-w-2xl bg-gray-800 p-4 rounded shadow">
+    <p class="font-semibold mb-2">Step 1: Add This in &lt;head&gt;</p>
+    <pre class="bg-gray-700 p-3 rounded text-sm overflow-x-auto"><code id="headCode">&lt;script src="https://yaf-zeta.vercel.app/effects.js"&gt;&lt;/script&gt;</code></pre>
+  </div>
+
+  <!-- Step 3: Body Code -->
+  <div id="bodyBox" class="hidden w-full max-w-2xl bg-gray-800 p-4 rounded shadow">
+    <p class="font-semibold mb-2">Step 2: Add This in &lt;body&gt; Where You Want the Effect</p>
+    <pre class="bg-gray-700 p-3 rounded text-sm overflow-x-auto"><code id="bodyCode"></code></pre>
+  </div>
+
+  <!-- Step 4: Token -->
+  <div id="tokenBox" class="hidden w-full max-w-2xl bg-gray-800 p-4 rounded shadow">
+    <p class="font-semibold mb-2">Step 3: Your Token</p>
+    <code id="tokenDisplay" class="text-green-400 break-words"></code>
+  </div>
+
+  <script>
+    const tokens = {
+      typing: "yafa-typing-2025",
+      fade: "yafa-fade-2025"
+    };
+
+    const bodySnippets = {
+      typing: `
+<div class="yafa-effect" 
+     data-effect="typing" 
+     data-token="${tokens.typing}" 
+     data-text='["text1", "text2", "text3"]'>
+</div>`.trim(),
+
+      fade: `
+<div class="yafa-effect opacity-0 transition-opacity duration-1000 delay-300 ease-in-out"
+     data-effect="fade" 
+     data-token="${tokens.fade}" 
+     data-trigger="scroll" 
+     data-delay="300">
+  <h2 class="text-3xl font-bold text-center">Fade In From Invisible</h2>
+  <p class="text-gray-300 mt-2 text-center">This content fades in with a smooth delay and opacity animation.</p>
+</div>`.trim()
+    };
+
+    document.getElementById("effectSelect").addEventListener("change", function () {
+      const selected = this.value;
+      if (!selected || !bodySnippets[selected]) return;
+
+      // Show code sections
+      document.getElementById("headBox").classList.remove("hidden");
+      document.getElementById("bodyBox").classList.remove("hidden");
+      document.getElementById("tokenBox").classList.remove("hidden");
+
+      // Fill values
+      document.getElementById("bodyCode").textContent = bodySnippets[selected];
+      document.getElementById("tokenDisplay").textContent = tokens[selected];
+    });
+  </script>
+</body>
+</html>

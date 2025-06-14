@@ -16,11 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
         case "typing":
           startTypingEffect(el);
           break;
-        case "fade":
-          startFadeEffect(el);
-          break;
-        default:
-          console.warn(`Unsupported effect: ${effect}`);
       }
     });
   });
@@ -28,8 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ✅ التحقق من التوكن
   function verifyToken(effect, token) {
     const validTokens = {
-      typing: "yafa-typing-2025",
-      fade: "yafa-fade-2025",
+      typing: "dHlwaW5nLTE3NDk5MjM4MTItSk5LaGRISGs=",
     };
     return validTokens[effect] === token;
   }

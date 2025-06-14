@@ -15,7 +15,6 @@
     <select id="effectSelect" class="bg-gray-800 border border-gray-600 px-4 py-2 rounded w-full text-white">
       <option value="">-- Select Effect --</option>
       <option value="typing">Typing Effect</option>
-      <option value="fade">Fade Multi-Step</option>
     </select>
   </div>
 
@@ -39,27 +38,17 @@
 
   <script>
     const tokens = {
-      typing: "yafa-typing-2025",
-      fade: "yafa-fade-2025"
+      typing: "dHlwaW5nLTE3NDk5MjM4MTItSk5LaGRISGs=",
+      //other effects
     };
 
     const bodySnippets = {
       typing: `
 <div class="yafa-effect" 
      data-effect="typing" 
-     data-token="${tokens.typing}" 
+     data-token="YOUR_TOKEN" 
      data-text='["text1", "text2", "text3"]'>
-</div>`.trim(),
-
-      fade: `
-<div class="yafa-effect opacity-0 transition-opacity duration-1000 delay-300 ease-in-out"
-     data-effect="fade" 
-     data-token="${tokens.fade}" 
-     data-trigger="scroll" 
-     data-delay="300">
-  <h2 class="text-3xl font-bold text-center">Fade In From Invisible</h2>
-  <p class="text-gray-300 mt-2 text-center">This content fades in with a smooth delay and opacity animation.</p>
-</div>`.trim()
+</div>`.trim()//,
     };
 
     document.getElementById("effectSelect").addEventListener("change", function () {

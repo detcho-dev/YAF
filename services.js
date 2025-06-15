@@ -1,46 +1,68 @@
- // توكنات ثابتة لكل إيفيكت
- const tokens = {
-    typing: "yafa-typing-2025",
-    fade: "yafa-fade-2025"
-  };
+const effects = [
+      {
+        name: "Typing Effect",
+        key: "typing",
+        token: "dHlwaW5nLTE3NDk5MjM4MTItSk5LaGRISGs=",
+        head: '<script src="https://yaf-zeta.vercel.app/effects.js"></script>',
+        body: '<div class="yafa-effect" data-effect="typing" data-token="YOUR_TOKEN" data-text="[&quot;text1&quot;,&quot;text2&quot;,&quot;text3&quot;]"></div>'
+      },
+      {
+        name: "Confetti Effect",
+        key: "confetti",
+        token: "Y29uZmV0dGktMTc1MDAwMDAwMC1ZT1VSVE9LRU4=",
+        head: '<script src="https://yaf-zeta.vercel.app/effects.js"></script>\n<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>',
+        body: '<div class="yafa-effect" data-effect="confetti" data-token="YOUR_TOKEN"></div>'
+      }
+    ];
 
-  // أكواد التأثيرات (HTML كامل)
-  const effectCodes = {
-    typing: `
-  <div class="yafa-effect" 
-   data-effect="typing" 
-   data-token="${tokens.typing}" 
-   data-text='["Welcome!", "Explore more!", "Thanks for visiting!"]'>
-  </div>
-  <script src="https://yourdomain.com/effects/main.js"></script>
-    `.trim(),
+    const container = document.getElementById("effectsContainer");
 
-    fade: `
-  <div class="yafa-effect opacity-0 transition-opacity duration-1000 delay-300 ease-in-out"
-   data-effect="fade" 
-   data-token="${tokens.fade}" 
-   data-trigger="scroll" 
-   data-delay="300">
-<h2 class="text-3xl font-bold text-center">Fade In From Invisible</h2>
-<p class="text-gray-300 mt-2 text-center">This content fades in with a smooth delay and opacity animation.</p>
-</div>
-<script src="https://yourdomain.com/effects/main.js"></script>
-    `.trim()
-  };
+    effects.forEach(effect => {
+      // الكارت
+      const card = document.createElement("div");
+      card.className = "bg-gray-800 rounded p-4 shadow";
 
-  // عند تغيير الاختيار
-  document.getElementById("effectSelect").addEventListener("change", function () {
-    const selected = this.value;
-    if (!selected || !effectCodes[selected]) return;
+      // العنوان
+      const header = document.createElement("h2");
+      header.className = "font-bold text-xl cursor-pointer mb-2";
+      header.textContent = effect.name;
+      card.appendChild(header);
 
-    document.getElementById("finalCode").textContent = effectCodes[selected];
-    document.getElementById("resultBox").classList.remove("hidden");
-  });
+      // المحتوى المخفي
+      const content = document.createElement("div");
+      content.className = "space-y-4 hidden";
 
-  // زر النسخ
-  function copyCode() {
-    const text = document.getElementById("finalCode").textContent;
-    navigator.clipboard.writeText(text).then(() => {
-      alert("Code copied to clipboard!");
+      // Add This in <head>
+      const headTitle = document.createElement("p");
+      headTitle.className = "font-semibold text-sm";
+      headTitle.textContent = "Add This in <head>";
+      const headCode = document.createElement("pre");
+      headCode.className = "bg-gray-700 p-3 rounded text-sm overflow-x-auto whitespace-pre-wrap";
+      const headInner = document.createElement("code");
+      headInner.textContent = effect.head;
+      headCode.appendChild(headInner);
+
+      // Add This in <body>
+      const bodyTitle = document.createElement("p");
+      bodyTitle.className = "font-semibold text-sm";
+      bodyTitle.textContent = "Add This in <body>";
+      const bodyCode = document.createElement("pre");
+      bodyCode.className = "bg-gray-700 p-3 rounded text-sm overflow-x-auto whitespace-pre-wrap";
+      const bodyInner = document.createElement("code");
+      bodyInner.textContent = effect.body;
+      bodyCode.appendChild(bodyInner);
+
+      // Your Token
+      const tokenTitle = document.createElement("p");
+      tokenTitle.className = "font-semibold text-sm";
+      tokenTitle.textContent = "Your Token";
+      const tokenCode = document.createElement("code");
+      tokenCode.className = "text-green-400 break-words block";
+      tokenCode.textContent = effect.token;
+
+      // تجميع العناصر
+      content.append(headTitle, headCode, bodyTitle, bodyCode, tokenTitle, tokenCode);
+      header.addEventListener("click", () => content.classList.toggle("hidden"));
+      card.append(content);
+      container.append(card);
     });
-  }

@@ -44,12 +44,12 @@ const effects = [
         codeBlock.appendChild(code);
 
         const copyBtn = document.createElement("button");
-        copyBtn.textContent = "📋";
+        copyBtn.textContent = "🗐";
         copyBtn.className = "absolute top-1 right-2 text-xs bg-gray-600 hover:bg-gray-500 px-2 py-1 rounded";
         copyBtn.addEventListener("click", () => {
           navigator.clipboard.writeText(codeContent);
           copyBtn.textContent = "✅ Copied!";
-          setTimeout(() => copyBtn.textContent = "📋", 1500);
+          setTimeout(() => copyBtn.textContent = "🗐", 1500);
         });
 
         wrapper.appendChild(codeBlock);
@@ -74,12 +74,12 @@ const effects = [
       tokenCode.textContent = effect.token;
 
       const tokenCopyBtn = document.createElement("button");
-      tokenCopyBtn.textContent = "📋";
+      tokenCopyBtn.textContent = "🗐";
       tokenCopyBtn.className = "absolute top-1 right-2 text-xs bg-gray-600 hover:bg-gray-500 px-2 py-1 rounded";
       tokenCopyBtn.addEventListener("click", () => {
         navigator.clipboard.writeText(effect.token);
         tokenCopyBtn.textContent = "✅ Copied!";
-        setTimeout(() => tokenCopyBtn.textContent = "📋", 1500);
+        setTimeout(() => tokenCopyBtn.textContent = "🗐", 1500);
       });
 
       tokenWrapper.appendChild(tokenCode);

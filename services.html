@@ -5,72 +5,95 @@
   <title>YAFA Effects Generator</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen px-4 py-10 gap-6">
+<body class="flex flex-col items-center justify-start min-h-screen px-4 py-10 gap-6">
 
-  <h1 class="text-4xl font-bold mb-4">🎨 Choose a YAFA Effect</h1>
+  <h1 class="text-4xl font-bold mb-6">🎨 YAFA Effects Library</h1>
 
-  <!-- Step 1: Select Effect -->
-  <div class="w-full max-w-lg">
-    <label for="effectSelect" class="block mb-2 font-semibold">Step 1: Select Effect</label>
-    <select id="effectSelect" class="bg-gray-800 border border-gray-600 px-4 py-2 rounded w-full text-white">
-      <option value="">-- Select Effect --</option>
-      <option value="typing">Typing Effect</option>
-      <option value="confetti">Confetti Effect</option>
-    </select>
-  </div>
-
-  <!-- Step 2: Head Code -->
-  <div id="headBox" class="hidden w-full max-w-2xl bg-gray-800 p-4 rounded shadow">
-    <p class="font-semibold mb-2">Step 1: Add This in &lt;head&gt;</p>
-    <pre class="bg-gray-700 p-3 rounded text-sm overflow-x-auto"><code id="headCode">&lt;script src="https://yaf-zeta.vercel.app/effects.js"&gt;&lt;/script&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"&gt;&lt;/script&gt;</code></pre>
-  </div>
-
-  <!-- Step 3: Body Code -->
-  <div id="bodyBox" class="hidden w-full max-w-2xl bg-gray-800 p-4 rounded shadow">
-    <p class="font-semibold mb-2">Step 2: Add This in &lt;body&gt; Where You Want the Effect</p>
-    <pre class="bg-gray-700 p-3 rounded text-sm overflow-x-auto"><code id="bodyCode"></code></pre>
-  </div>
-
-  <!-- Step 4: Token -->
-  <div id="tokenBox" class="hidden w-full max-w-2xl bg-gray-800 p-4 rounded shadow">
-    <p class="font-semibold mb-2">Step 3: Your Token</p>
-    <code id="tokenDisplay" class="text-green-400 break-words"></code>
-  </div>
+  <div class="w-full max-w-2xl space-y-4" id="effectsContainer"></div>
 
   <script>
-    const tokens = {
-      typing: "dHlwaW5nLTE3NDk5MjM4MTItSk5LaGRISGs=",
-      confetti: "Y29uZmV0dGktMTc1MDAwMDAwMC1ZT1VSVE9LRU4="
-    };
-
-    const bodySnippets = {
-      typing: `
+    const effects = [
+      {
+        name: "Typing Effect",
+        key: "typing",
+        token: "dHlwaW5nLTE3NDk5MjM4MTItSk5LaGRISGs=",
+        head: `
+<script src="https://yaf-zeta.vercel.app/effects.js"></script>
+`.trim(),
+        body: `
 <div class="yafa-effect" 
      data-effect="typing" 
      data-token="YOUR_TOKEN" 
-     data-text='["text1", "text2", "text3"]'>
-</div>`.trim(),
-
-      confetti: `
+     data-text='["text1", "text2", "text3"]'></div>
+`.trim()
+      },
+      {
+        name: "Confetti Effect",
+        key: "confetti",
+        token: "Y29uZmV0dGktMTc1MDAwMDAwMC1ZT1VSVE9LRU4=",
+        head: `
+<script src="https://yaf-zeta.vercel.app/effects.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+`.trim(),
+        body: `
 <div class="yafa-effect" 
      data-effect="confetti" 
-     data-token="YOUR_TOKEN">
-</div>`.trim()
-    };
+     data-token="YOUR_TOKEN"></div>
+`.trim()
+      }
+    ];
 
-    document.getElementById("effectSelect").addEventListener("change", function () {
-      const selected = this.value;
-      if (!selected || !bodySnippets[selected]) return;
+    const container = document.getElementById("effectsContainer");
 
-      // Show code sections
-      document.getElementById("headBox").classList.remove("hidden");
-      document.getElementById("bodyBox").classList.remove("hidden");
-      document.getElementById("tokenBox").classList.remove("hidden");
+    effects.forEach(effect => {
+      const card = document.createElement("div");
+      card.className = "bg-gray-800 rounded p-4 shadow";
 
-      // Fill values
-      document.getElementById("bodyCode").textContent = bodySnippets[selected];
-      document.getElementById("tokenDisplay").textContent = tokens[selected];
+      const header = document.createElement("div");
+      header.className = "font-bold text-lg cursor-pointer mb-2";
+      header.textContent = effect.name;
+      card.appendChild(header);
+
+      const content = document.createElement("div");
+      content.className = "space-y-2 hidden";
+
+      const headTitle = document.createElement("p");
+      headTitle.className = "font-semibold text-sm";
+      headTitle.textContent = "Add This in <head>";
+      content.appendChild(headTitle);
+
+      const headCode = document.createElement("pre");
+      headCode.className = "bg-gray-700 p-3 rounded text-sm overflow-x-auto whitespace-pre-wrap";
+      headCode.textContent = effect.head;
+      content.appendChild(headCode);
+
+      const bodyTitle = document.createElement("p");
+      bodyTitle.className = "font-semibold text-sm";
+      bodyTitle.textContent = "Add This in <body>";
+      content.appendChild(bodyTitle);
+
+      const bodyCode = document.createElement("pre");
+      bodyCode.className = "bg-gray-700 p-3 rounded text-sm overflow-x-auto whitespace-pre-wrap";
+      bodyCode.textContent = effect.body;
+      content.appendChild(bodyCode);
+
+      const tokenTitle = document.createElement("p");
+      tokenTitle.className = "font-semibold text-sm";
+      tokenTitle.textContent = "Your Token";
+      content.appendChild(tokenTitle);
+
+      const tokenCode = document.createElement("code");
+      tokenCode.className = "text-green-400 break-words";
+      tokenCode.textContent = effect.token;
+      content.appendChild(tokenCode);
+
+      card.appendChild(content);
+
+      header.addEventListener("click", () => {
+        content.classList.toggle("hidden");
+      });
+
+      container.appendChild(card);
     });
   </script>
 </body>

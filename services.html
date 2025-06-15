@@ -2,14 +2,14 @@
 <html lang="en" class="bg-gray-900 text-white">
 <head>
   <meta charset="UTF-8">
-  <title>YAFA Effects Generator</title>
+  <title>🎨 YAFA Effects Library</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex flex-col items-center justify-start min-h-screen px-4 py-10 gap-6">
+<body class="min-h-screen px-4 py-10">
 
-  <h1 class="text-4xl font-bold mb-6">🎨 YAFA Effects Library</h1>
+  <h1 class="text-4xl font-bold text-center mb-10">🎨 YAFA Effects Library</h1>
 
-  <div class="w-full max-w-2xl space-y-4" id="effectsContainer"></div>
+  <div id="effectsContainer" class="space-y-6 max-w-3xl mx-auto"></div>
 
   <script>
     const effects = [
@@ -17,29 +17,21 @@
         name: "Typing Effect",
         key: "typing",
         token: "dHlwaW5nLTE3NDk5MjM4MTItSk5LaGRISGs=",
-        head: `
-<script src="https://yaf-zeta.vercel.app/effects.js"></script>
-`.trim(),
-        body: `
-<div class="yafa-effect" 
+        head: `<script src="https://yaf-zeta.vercel.app/effects.js"></script>`,
+        body: `<div class="yafa-effect" 
      data-effect="typing" 
      data-token="YOUR_TOKEN" 
-     data-text='["text1", "text2", "text3"]'></div>
-`.trim()
+     data-text='["text1", "text2", "text3"]'></div>`
       },
       {
         name: "Confetti Effect",
         key: "confetti",
         token: "Y29uZmV0dGktMTc1MDAwMDAwMC1ZT1VSVE9LRU4=",
-        head: `
-<script src="https://yaf-zeta.vercel.app/effects.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-`.trim(),
-        body: `
-<div class="yafa-effect" 
+        head: `<script src="https://yaf-zeta.vercel.app/effects.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>`,
+        body: `<div class="yafa-effect" 
      data-effect="confetti" 
-     data-token="YOUR_TOKEN"></div>
-`.trim()
+     data-token="YOUR_TOKEN"></div>`
       }
     ];
 
@@ -49,52 +41,54 @@
       const card = document.createElement("div");
       card.className = "bg-gray-800 rounded p-4 shadow";
 
-      const header = document.createElement("div");
-      header.className = "font-bold text-lg cursor-pointer mb-2";
+      const header = document.createElement("h2");
+      header.className = "font-bold text-xl cursor-pointer mb-2";
       header.textContent = effect.name;
-      card.appendChild(header);
 
       const content = document.createElement("div");
-      content.className = "space-y-2 hidden";
+      content.className = "space-y-4 hidden";
 
       const headTitle = document.createElement("p");
       headTitle.className = "font-semibold text-sm";
       headTitle.textContent = "Add This in <head>";
-      content.appendChild(headTitle);
-
       const headCode = document.createElement("pre");
       headCode.className = "bg-gray-700 p-3 rounded text-sm overflow-x-auto whitespace-pre-wrap";
-      headCode.textContent = effect.head;
-      content.appendChild(headCode);
+      const headCodeInner = document.createElement("code");
+      headCodeInner.textContent = effect.head;
+      headCode.appendChild(headCodeInner);
 
       const bodyTitle = document.createElement("p");
       bodyTitle.className = "font-semibold text-sm";
       bodyTitle.textContent = "Add This in <body>";
-      content.appendChild(bodyTitle);
-
       const bodyCode = document.createElement("pre");
       bodyCode.className = "bg-gray-700 p-3 rounded text-sm overflow-x-auto whitespace-pre-wrap";
-      bodyCode.textContent = effect.body;
-      content.appendChild(bodyCode);
+      const bodyCodeInner = document.createElement("code");
+      bodyCodeInner.textContent = effect.body;
+      bodyCode.appendChild(bodyCodeInner);
 
       const tokenTitle = document.createElement("p");
       tokenTitle.className = "font-semibold text-sm";
       tokenTitle.textContent = "Your Token";
-      content.appendChild(tokenTitle);
-
       const tokenCode = document.createElement("code");
       tokenCode.className = "text-green-400 break-words";
       tokenCode.textContent = effect.token;
-      content.appendChild(tokenCode);
 
-      card.appendChild(content);
+      content.appendChild(headTitle);
+      content.appendChild(headCode);
+      content.appendChild(bodyTitle);
+      content.appendChild(bodyCode);
+      content.appendChild(tokenTitle);
+      content.appendChild(tokenCode);
 
       header.addEventListener("click", () => {
         content.classList.toggle("hidden");
       });
 
+      card.appendChild(header);
+      card.appendChild(content);
       container.appendChild(card);
     });
   </script>
+
 </body>
 </html>

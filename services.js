@@ -31,7 +31,7 @@ effects.forEach(effect => {
   card.appendChild(header);
 
   const content = document.createElement("div");
-  content.className = "space-y-4 hidden";
+  content.className = "space-y-4 transition-max max-h-0 overflow-hidden";
 
   function addSection(titleText, codeContent) {
     const title = document.createElement("p");
@@ -95,7 +95,8 @@ effects.forEach(effect => {
   content.appendChild(tokenWrapper);
 
   header.addEventListener("click", () => {
-    content.classList.toggle("hidden");
+    content.classList.toggle("max-h-0");
+    content.classList.toggle("max-h-[1000px]");
   });
 
   card.appendChild(content);

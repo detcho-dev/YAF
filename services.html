@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="bg-gray-900 text-white">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>🎨 YAFA Effects Library</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -11,8 +11,8 @@
 
   <div id="effectsContainer" class="space-y-6 max-w-3xl mx-auto"></div>
 
+  <!-- الكود اللي بيدير إنشاء البطاقات -->
   <script>
-    // بيانات التأثيرات
     const effects = [
       {
         name: "Typing Effect",
@@ -32,13 +32,12 @@
 
     const container = document.getElementById("effectsContainer");
 
-    // إنشاء بطاقة لكل تأثير
     effects.forEach(effect => {
-      // العنصر الرئيسي للكارت
+      // الكارت
       const card = document.createElement("div");
       card.className = "bg-gray-800 rounded p-4 shadow";
 
-      // عنوان الكارت
+      // العنوان
       const header = document.createElement("h2");
       header.className = "font-bold text-xl cursor-pointer mb-2";
       header.textContent = effect.name;
@@ -48,7 +47,7 @@
       const content = document.createElement("div");
       content.className = "space-y-4 hidden";
 
-      // قسم head
+      // Add This in <head>
       const headTitle = document.createElement("p");
       headTitle.className = "font-semibold text-sm";
       headTitle.textContent = "Add This in <head>";
@@ -58,7 +57,7 @@
       headInner.textContent = effect.head;
       headCode.appendChild(headInner);
 
-      // قسم body
+      // Add This in <body>
       const bodyTitle = document.createElement("p");
       bodyTitle.className = "font-semibold text-sm";
       bodyTitle.textContent = "Add This in <body>";
@@ -68,7 +67,7 @@
       bodyInner.textContent = effect.body;
       bodyCode.appendChild(bodyInner);
 
-      // قسم token
+      // Your Token
       const tokenTitle = document.createElement("p");
       tokenTitle.className = "font-semibold text-sm";
       tokenTitle.textContent = "Your Token";
@@ -76,21 +75,11 @@
       tokenCode.className = "text-green-400 break-words block";
       tokenCode.textContent = effect.token;
 
-      // تجميع المحتوى
-      content.appendChild(headTitle);
-      content.appendChild(headCode);
-      content.appendChild(bodyTitle);
-      content.appendChild(bodyCode);
-      content.appendChild(tokenTitle);
-      content.appendChild(tokenCode);
-
-      // تفعيل الفتح/الغلق
-      header.addEventListener("click", () => {
-        content.classList.toggle("hidden");
-      });
-
-      card.appendChild(content);
-      container.appendChild(card);
+      // تجميع العناصر
+      content.append(headTitle, headCode, bodyTitle, bodyCode, tokenTitle, tokenCode);
+      header.addEventListener("click", () => content.classList.toggle("hidden"));
+      card.append(content);
+      container.append(card);
     });
   </script>
 
